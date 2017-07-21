@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 18-Jul-2017 às 01:08
+-- Generation Time: 21-Jul-2017 às 22:26
 -- Versão do servidor: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -212,15 +212,37 @@ INSERT INTO `curso_disciplina` (`curso_id`, `disciplina_id`, `created_at`, `upda
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `curso_documentos`
+-- Estrutura da tabela `curso_documento`
 --
 
-CREATE TABLE `curso_documentos` (
+CREATE TABLE `curso_documento` (
   `curso_id` int(11) NOT NULL,
   `documento_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL,
   `updated_at` timestamp NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `curso_estagio`
+--
+
+CREATE TABLE `curso_estagio` (
+  `curso_id` int(11) NOT NULL,
+  `estagio_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `curso_estagio`
+--
+
+INSERT INTO `curso_estagio` (`curso_id`, `estagio_id`, `created_at`, `updated_at`) VALUES
+(1, 3, '2017-07-21 20:15:44', '2017-07-21 20:15:44'),
+(2, 3, '2017-07-21 20:15:44', '2017-07-21 20:15:44'),
+(3, 3, '2017-07-21 20:15:44', '2017-07-21 20:15:44');
 
 -- --------------------------------------------------------
 
@@ -279,6 +301,39 @@ CREATE TABLE `documentos` (
   `created_at` timestamp NOT NULL,
   `updated_at` timestamp NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `documentos`
+--
+
+INSERT INTO `documentos` (`id`, `nome`, `categoria`, `link`, `created_at`, `updated_at`) VALUES
+(1, 'Requerimento de admissão à prova pública', 'Requerimentos', 'http://www.ismt.pt/pt-files/pdf/RequerimentoAdmProPub.pdf', '2017-07-18 01:49:00', '2017-07-18 01:49:00');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `estagios`
+--
+
+CREATE TABLE `estagios` (
+  `id` int(11) NOT NULL,
+  `empresa` varchar(100) NOT NULL,
+  `area` varchar(100) NOT NULL,
+  `n_horas` int(11) NOT NULL,
+  `local` varchar(250) NOT NULL,
+  `contacto` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `estagios`
+--
+
+INSERT INTO `estagios` (`id`, `empresa`, `area`, `n_horas`, `local`, `contacto`, `created_at`, `updated_at`) VALUES
+(1, 'Amora Digital', 'Programação', 250, 'Condeixa', 912345678, '2017-07-21 20:10:33', '2017-07-21 20:10:33'),
+(2, 'Amora Digital', 'Programação', 250, 'Condeixa', 912345678, '2017-07-21 20:12:10', '2017-07-21 20:12:10'),
+(3, 'Test', 'test', 152, 'teste', 912345678, '2017-07-21 20:15:44', '2017-07-21 20:15:44');
 
 -- --------------------------------------------------------
 
@@ -392,6 +447,38 @@ INSERT INTO `horario_disciplina` (`horario_id`, `disciplina_id`, `created_at`, `
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Extraindo dados da tabela `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(1, '2014_10_12_000000_create_users_table', 1),
+(2, '2014_10_12_100000_create_password_resets_table', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `password_resets`
+--
+
+CREATE TABLE `password_resets` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `professores`
 --
 
@@ -452,6 +539,29 @@ CREATE TABLE `propinas` (
 
 INSERT INTO `propinas` (`id`, `ano`, `mes`, `valor`, `created_at`, `updated_at`) VALUES
 (1, 2013, 'Maio', 235, '2017-07-17 15:54:24', '2017-07-17 15:54:24');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Extraindo dados da tabela `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 'admin@admin.pt', '$2y$10$F/n9Y8ZpwhaOZXoMMhBBJugUpAcachpCUDvTkIcRdRLSHNcLTjir6', 'l9ATE2TALcKfWGfek0gHa9yStbAg4jhi52Nk53Ktv9WKyknORLoXcMGeRQ2d', '2017-07-21 18:56:43', '2017-07-21 18:56:43');
 
 --
 -- Indexes for dumped tables
@@ -525,12 +635,20 @@ ALTER TABLE `curso_disciplina`
   ADD KEY `disciplina_id` (`disciplina_id`);
 
 --
--- Indexes for table `curso_documentos`
+-- Indexes for table `curso_documento`
 --
-ALTER TABLE `curso_documentos`
+ALTER TABLE `curso_documento`
   ADD PRIMARY KEY (`curso_id`,`documento_id`),
   ADD KEY `curso_id` (`curso_id`,`documento_id`),
   ADD KEY `documento_id` (`documento_id`);
+
+--
+-- Indexes for table `curso_estagio`
+--
+ALTER TABLE `curso_estagio`
+  ADD PRIMARY KEY (`curso_id`,`estagio_id`),
+  ADD KEY `id_curso` (`curso_id`,`estagio_id`),
+  ADD KEY `id_estagio` (`estagio_id`);
 
 --
 -- Indexes for table `curso_propina`
@@ -550,6 +668,12 @@ ALTER TABLE `disciplinas`
 -- Indexes for table `documentos`
 --
 ALTER TABLE `documentos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `estagios`
+--
+ALTER TABLE `estagios`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -588,6 +712,18 @@ ALTER TABLE `horario_disciplina`
   ADD KEY `disciplina_id` (`disciplina_id`);
 
 --
+-- Indexes for table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD KEY `password_resets_email_index` (`email`);
+
+--
 -- Indexes for table `professores`
 --
 ALTER TABLE `professores`
@@ -606,6 +742,13 @@ ALTER TABLE `professor_disciplina`
 --
 ALTER TABLE `propinas`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -635,7 +778,12 @@ ALTER TABLE `disciplinas`
 -- AUTO_INCREMENT for table `documentos`
 --
 ALTER TABLE `documentos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `estagios`
+--
+ALTER TABLE `estagios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `eventos`
 --
@@ -647,6 +795,11 @@ ALTER TABLE `eventos`
 ALTER TABLE `horarios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
+-- AUTO_INCREMENT for table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `professores`
 --
 ALTER TABLE `professores`
@@ -656,6 +809,11 @@ ALTER TABLE `professores`
 --
 ALTER TABLE `propinas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Constraints for dumped tables
 --
@@ -703,11 +861,18 @@ ALTER TABLE `curso_disciplina`
   ADD CONSTRAINT `curso_disciplina_ibfk_2` FOREIGN KEY (`disciplina_id`) REFERENCES `disciplinas` (`id`);
 
 --
--- Limitadores para a tabela `curso_documentos`
+-- Limitadores para a tabela `curso_documento`
 --
-ALTER TABLE `curso_documentos`
-  ADD CONSTRAINT `curso_documentos_ibfk_1` FOREIGN KEY (`curso_id`) REFERENCES `cursos` (`id`),
-  ADD CONSTRAINT `curso_documentos_ibfk_2` FOREIGN KEY (`documento_id`) REFERENCES `documentos` (`id`);
+ALTER TABLE `curso_documento`
+  ADD CONSTRAINT `curso_documento_ibfk_1` FOREIGN KEY (`curso_id`) REFERENCES `cursos` (`id`),
+  ADD CONSTRAINT `curso_documento_ibfk_2` FOREIGN KEY (`documento_id`) REFERENCES `documentos` (`id`);
+
+--
+-- Limitadores para a tabela `curso_estagio`
+--
+ALTER TABLE `curso_estagio`
+  ADD CONSTRAINT `curso_estagio_ibfk_1` FOREIGN KEY (`curso_id`) REFERENCES `cursos` (`id`),
+  ADD CONSTRAINT `curso_estagio_ibfk_2` FOREIGN KEY (`estagio_id`) REFERENCES `estagios` (`id`);
 
 --
 -- Limitadores para a tabela `curso_propina`
